@@ -1,10 +1,16 @@
-import { Router } from "express";
-import { createRoomController, createUserController } from "../controllers/createController";
-import { uploadFiles } from "../middlewares/fileUploadMiddleware";
+import { Request, Response, Router } from "express";
+import { createProfileController, createRoomController, createUserController } from "../controllers/createController";
+import { checkOneTimeTokenMiddleware } from "../middlewares/tokenValidateMiddleware";
+import { fileUploadHandleMiddleware } from "../middlewares/fileUploadMiddleware";
+import { loginController } from "../controllers/bdCheckController";
 const chatRoutes = Router()
 
 chatRoutes.post('/room', createRoomController)
 
-chatRoutes.post('/user', uploadFiles, createUserController)
+chatRoutes.post('/user', createUserController)
+
+chatRoutes.post('/profile', checkOneTimeTokenMiddleware, fileUploadHandleMiddleware, createProfileController)
+
+chatRoutes.post('/login', loginController)
 
 export default chatRoutes;
