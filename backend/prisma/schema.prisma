@@ -12,3 +12,27 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       Int       @id @default(autoincrement())
+  username String
+  email    String    @unique
+  password String
+  profile  String
+  messages Message[]
+}
+
+model Room {
+  id        Int      @id @default(autoincrement())
+  roomId    String   @unique
+  roomPass  String
+  create_at DateTime @default(now())
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  username   User     @relation(fields: [userId], references: [id])
+  userId     Int
+  message    String
+  created_at DateTime @default(now())
+}
