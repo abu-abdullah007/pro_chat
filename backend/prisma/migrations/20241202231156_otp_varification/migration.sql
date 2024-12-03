@@ -1,0 +1,8 @@
+-- DropForeignKey
+ALTER TABLE `OTP` DROP FOREIGN KEY `OTP_authorID_fkey`;
+
+-- AlterTable
+ALTER TABLE `OTP` MODIFY `authorID` INTEGER NULL;
+
+-- AddForeignKey
+ALTER TABLE `OTP` ADD CONSTRAINT `OTP_authorID_fkey` FOREIGN KEY (`authorID`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

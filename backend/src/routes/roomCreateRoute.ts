@@ -3,6 +3,7 @@ import { createProfileController, createRoomController, createUserController } f
 import { checkOneTimeTokenMiddleware } from "../middlewares/tokenValidateMiddleware";
 import { fileUploadHandleMiddleware } from "../middlewares/fileUploadMiddleware";
 import { loginController } from "../controllers/bdCheckController";
+import { otpSendMidleware } from "../middlewares/otpSendMiddleware";
 const chatRoutes = Router()
 
 chatRoutes.post('/room', createRoomController)

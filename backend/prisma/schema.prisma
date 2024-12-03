@@ -21,6 +21,15 @@ model User {
   email     String    @unique
   password  String
   profile   Profile[]
+  OTP       OTP?
+}
+
+model OTP {
+  id         Int      @id @default(autoincrement())
+  otp        String?
+  authorID   Int?     @unique
+  author     User?    @relation(fields: [authorID], references: [id])
+  created_at DateTime @default(now())
 }
 
 model Profile {
@@ -31,6 +40,7 @@ model Profile {
   education    String?
   phone        String?
   profileImage String?
+  active       Boolean  @default(false)
   Message      Message?
   bio          String?  @db.VarChar(100)
 }
