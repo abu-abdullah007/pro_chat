@@ -1,6 +1,7 @@
 import { Server, Socket } from 'socket.io'
 import { socketAuthCheck } from './socketMiddleware/authCheckMiddleware'
 import prisma from '../db/prismaConfig'
+import { getActiveUsers } from './socketEvents/getDataFromDatabase'
 
 const setupSocket = (io: Server) => {
     io.use(socketAuthCheck)
@@ -26,7 +27,7 @@ const setupSocket = (io: Server) => {
             }
 
 
-
+            getActiveUsers(socket)
 
 
             socket.on('disconnect', async () => {
